@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 require('dotenv/config')
-//const cors = require('cors')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
@@ -14,14 +14,13 @@ const petsRoute = require('./routes/pets')
 const actionsRoute = require('./routes/actions')
 
 app.use(cookieParser())
-/*a
-pp.use(
+app.use(
     cors({
         origin: true,
         credentials: true,
     })
 );
-*/
+
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', parameterLimit: 100000, extended: true }));
 app.use('/api/users', usersRoute)
