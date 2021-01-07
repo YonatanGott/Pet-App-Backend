@@ -8,7 +8,6 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
 const app = express()
-const port = 5000
 
 const usersRoute = require('./routes/users')
 const petsRoute = require('./routes/pets')
@@ -36,4 +35,5 @@ app.get('/', (req, res) => {
     res.send('Hello')
 });
 
-app.listen(port);
+
+app.listen(process.env.PORT || 5000)
