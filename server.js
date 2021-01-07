@@ -26,6 +26,8 @@ app.use('/api/users', usersRoute)
 app.use('/api/pets', petsRoute)
 app.use('/api/actions', actionsRoute)
 
+app.set('trust proxy', 1)
+
 mongoose.connect(
     process.env.DB_KEY,
     { useNewUrlParser: true, useUnifiedTopology: true },
