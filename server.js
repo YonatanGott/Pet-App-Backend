@@ -22,9 +22,9 @@ app.use(
 );
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', parameterLimit: 100000, extended: true }));
-app.use('/users', usersRoute)
-app.use('/pets', petsRoute)
-app.use('/actions', actionsRoute)
+app.use('/api/users', usersRoute)
+app.use('/api/pets', petsRoute)
+app.use('/api/actions', actionsRoute)
 
 mongoose.connect(
     process.env.DB_KEY,
