@@ -5,8 +5,9 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Pet = require("../models/Pet");
 const { userSignup, userLogin } = require("../utils/auth");
-const { authToken } = require("../utils/jwtToken");
+//const { authToken } = require("../utils/jwtToken");
 
+// TOKEN MIDDLEWARE REMOVED
 
 
 // create json web token
@@ -95,7 +96,7 @@ router.get("/:userId", async (req, res) => {
     }
 });
 
-router.delete("/:userId", authToken, async (req, res) => {
+router.delete("/:userId", async (req, res) => {
     try {
         const removeUser = await User.remove({ _id: req.params.userId });
         res.json(removeUser);
@@ -104,7 +105,7 @@ router.delete("/:userId", authToken, async (req, res) => {
     }
 });
 
-router.patch("/:userId", authToken, async (req, res) => {
+router.patch("/:userId", async (req, res) => {
     const salt = await bcrypt.genSaltSync(10);
     const hash = await bcrypt.hashSync(req.body.password, salt);
 
@@ -155,7 +156,7 @@ router.get("/:userId/fostered", async (req, res) => {
     }
 });
 
-router.patch("/:userId/saved", authToken, async (req, res) => {
+router.patch("/:userId/saved", async (req, res) => {
     console.log(req.body);
     const newPet = await Pet.findById(req.body.petId);
     try {
@@ -173,7 +174,7 @@ router.patch("/:userId/saved", authToken, async (req, res) => {
     }
 });
 
-router.patch("/:userId/adopted", authToken, async (req, res) => {
+router.patch("/:userId/adopted", async (req, res) => {
     console.log(req.body);
     try {
         const petUpdate = {
@@ -199,7 +200,7 @@ router.patch("/:userId/adopted", authToken, async (req, res) => {
     }
 });
 
-router.patch("/:userId/fostered", authToken, async (req, res) => {
+router.patch("/:userId/fostered", async (req, res) => {
     console.log(req.body);
     try {
         const petUpdate = {
@@ -225,7 +226,7 @@ router.patch("/:userId/fostered", authToken, async (req, res) => {
     }
 });
 
-router.delete("/:userId/saved", authToken, async (req, res) => {
+router.delete("/:userId/saved", async (req, res) => {
     console.log(req.body);
     try {
         const pet = await Pet.findById(req.body.petId);
@@ -243,7 +244,7 @@ router.delete("/:userId/saved", authToken, async (req, res) => {
     }
 });
 
-router.delete("/:userId/adopted", authToken, async (req, res) => {
+router.delete("/:userId/adopted", async (req, res) => {
     console.log(req.body);
     const pet = await Pet.findById(req.body.petId);
     try {
@@ -270,7 +271,7 @@ router.delete("/:userId/adopted", authToken, async (req, res) => {
     }
 });
 
-router.delete("/:userId/fostered", authToken, async (req, res) => {
+router.delete("/:userId/fostered", async (req, res) => {
     console.log(req.body);
     const pet = await Pet.findById(req.body.petId);
     try {

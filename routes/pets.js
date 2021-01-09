@@ -3,7 +3,9 @@ const router = express.Router()
 const Pet = require('../models/Pet');
 const User = require('../models/User');
 const { cloudinary } = require('../utils/cloadinary')
-const { authToken } = require("../utils/jwtToken");
+//const { authToken } = require("../utils/jwtToken");
+
+// TOKEN MIDDLEWARE REMOVED
 
 
 router.get('/', async (req, res) => {
@@ -31,7 +33,7 @@ router.get('/petsId', async (req, res) => {
 );
 
 
-router.post('/addpet', authToken, async (req, res) => {
+router.post('/addpet', async (req, res) => {
 
     try {
         let imageId = [];
@@ -72,7 +74,7 @@ router.get('/:petId', async (req, res) => {
     }
 });
 
-router.patch('/:petId', authToken, async (req, res) => {
+router.patch('/:petId', async (req, res) => {
     try {
         let imageId = [];
         const image = req.body.images[0];
@@ -102,7 +104,7 @@ router.patch('/:petId', authToken, async (req, res) => {
     }
 });
 
-router.delete('/:petId', authToken, async (req, res) => {
+router.delete('/:petId', async (req, res) => {
     try {
         const removePet = await Pet.remove({ _id: req.params.petId });
         res.json(removePet)
